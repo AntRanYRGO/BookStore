@@ -2,16 +2,15 @@
             "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
 
-    <bean id="bookService"
-        class="se.yrgo.spring.services.BookServiceMockImpl">
-    </bean>
-    <bean id="accountService"
-        class="se.yrgo.spring.services.AccountServiceMockImpl">
-    </bean>
-    <bean id="purchasingService"
-        class="se.yrgo.spring.services.PurchasingServiceImpl">
-        <property name = "bookService" ref="bookService"/>
-        <property name = "accountService" ref="accountService"/>
+    <bean id="accountService" class="se.yrgo.spring.services.AccountServiceMockImpl"/>
+
+
+    <bean id="bookService" class="se.yrgo.spring.services.BookServiceMockImpl"/>
+
+
+    <bean id="purchasingService" class= "se.yrgo.spring.services.PurchasingServiceImpl">
+        <property name="bookService" ref="bookService"/>
+        <property name="accountService" ref="accountService"/>
     </bean>
 
 </beans>
