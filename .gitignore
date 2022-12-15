@@ -1,12 +1,2 @@
-/out/production/BookStore/se/yrgo/spring/services/AccountService.class
-/out/production/BookStore/se/yrgo/spring/services/AccountServiceMockImpl.class
-/out/production/BookStore/application.xml
-/out/production/BookStore/se/yrgo/spring/domain/Book.class
-/out/production/BookStore/se/yrgo/spring/services/BookService.class
-/out/production/BookStore/se/yrgo/spring/services/BookServiceMockImpl.class
-/out/production/BookStore/se/yrgo/spring/client/Client.class
-/out/production/BookStore/log4j.properties.disabled
-/out/production/BookStore/se/yrgo/spring/services/PurchasingService.class
-/out/production/BookStore/se/yrgo/spring/services/PurchasingServiceImpl.class
-/out/production/BookStore/se/yrgo/spring/data/BookDao.class
-/out/production/BookStore/se/yrgo/spring/data/BookDaoJdbcImpl.class
+/out/*
+/database.dat.*

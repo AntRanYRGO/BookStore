@@ -2,11 +2,13 @@
             "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
 
+    <bean id="bookDao" class="se.yrgo.spring.data.BookDaoJdbcImpl"/>
+
+    <bean id="bookService" class="se.yrgo.spring.services.BookServiceProductionImpl">
+        <constructor-arg ref="bookDao"/>
+    </bean>
+
     <bean id="accountService" class="se.yrgo.spring.services.AccountServiceMockImpl"/>
-
-
-    <bean id="bookService" class="se.yrgo.spring.services.BookServiceMockImpl"/>
-
 
     <bean id="purchasingService" class= "se.yrgo.spring.services.PurchasingServiceImpl">
         <property name="bookService" ref="bookService"/>
