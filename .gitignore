@@ -8,3 +8,5 @@
 /out/production/BookStore/log4j.properties.disabled
 /out/production/BookStore/se/yrgo/spring/services/PurchasingService.class
 /out/production/BookStore/se/yrgo/spring/services/PurchasingServiceImpl.class
+/out/production/BookStore/se/yrgo/spring/data/BookDao.class
+/out/production/BookStore/se/yrgo/spring/data/BookDaoJdbcImpl.class
