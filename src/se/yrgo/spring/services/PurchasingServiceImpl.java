@@ -3,14 +3,15 @@ package se.yrgo.spring.services;
 import se.yrgo.spring.domain.Book;
 
 public class PurchasingServiceImpl implements PurchasingService{
+
     private AccountService accounts;
     private BookService books;
 
-    public void setAccounts(AccountService accounts){
+    public void setAccountService(AccountService accounts){
         this.accounts = accounts;
     }
 
-    public void setBooks(BookService books){
+    public void setBookService(BookService books){
         this.books = books;
     }
 
