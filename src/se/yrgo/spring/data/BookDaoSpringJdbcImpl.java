@@ -55,7 +55,7 @@ public class BookDaoSpringJdbcImpl implements BookDao{
     @Override
     public Book findByIsbn(String isbn) throws BookNotFoundException {
         try {
-            return jdbcTemplate.queryForObject("SELECT * FROM BOOK WHERE ISBN = ?",
+            return jdbcTemplate.queryForObject("SELECT DISTINCT * FROM BOOK WHERE ISBN = ?",
                     new BookMapper(), isbn);
         } catch (EmptyResultDataAccessException e) {
             throw new BookNotFoundException();
