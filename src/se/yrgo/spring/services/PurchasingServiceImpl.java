@@ -1,5 +1,6 @@
 package se.yrgo.spring.services;
 
+import se.yrgo.spring.data.BookNotFoundException;
 import se.yrgo.spring.domain.Book;
 
 public class PurchasingServiceImpl implements PurchasingService{
@@ -16,7 +17,7 @@ public class PurchasingServiceImpl implements PurchasingService{
     }
 
     @Override
-    public void buyBook(String isbn) {
+    public void buyBook(String isbn) throws BookNotFoundException {
         Book book = books.getBookByIsbn(isbn);
         accounts.raiseInvoice(book);
     }

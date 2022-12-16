@@ -1,6 +1,8 @@
 package se.yrgo.spring.data;
 
 
+import org.springframework.dao.DataAccessException;
+import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
 import se.yrgo.spring.domain.Book;
@@ -51,9 +53,13 @@ public class BookDaoSpringJdbcImpl implements BookDao{
     }
 
     @Override
-    public Book findByIsbn(String isbn) {
-        return jdbcTemplate.queryForObject("SELECT * FROM BOOK WHERE ISBN = ?",
-                new BookMapper(), isbn);
+    public Book findByIsbn(String isbn) throws BookNotFoundException {
+        try {
+            return jdbcTemplate.queryForObject("SELECT * FROM BOOK WHERE ISBN = ?",
+                    new BookMapper(), isbn);
+        } catch (EmptyResultDataAccessException e) {
+            throw new BookNotFoundException();
+        }
     }
 
     @Override

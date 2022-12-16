@@ -1,6 +1,7 @@
 package se.yrgo.spring.services;
 
 import se.yrgo.spring.data.BookDao;
+import se.yrgo.spring.data.BookNotFoundException;
 import se.yrgo.spring.domain.Book;
 
 import java.util.List;
@@ -22,7 +23,7 @@ public class BookServiceProductionImpl implements BookService{
     }
 
     @Override
-    public Book getBookByIsbn(String isbn) {
+    public Book getBookByIsbn(String isbn) throws BookNotFoundException {
         return dao.findByIsbn(isbn);
     }
 
