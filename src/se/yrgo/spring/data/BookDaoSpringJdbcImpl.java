@@ -22,6 +22,9 @@ public class BookDaoSpringJdbcImpl implements BookDao{
 
     public BookDaoSpringJdbcImpl(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
+
+    }
+    private void createTables(){
         try{
             jdbcTemplate.update(CREATE_TABLE_SQL);
 
