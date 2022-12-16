@@ -34,18 +34,6 @@ public class BookDaoSpringJdbcImpl implements BookDao{
         }
     }
 
-    class BookMapper implements RowMapper<Book>{
-        @Override
-        public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
-            String isbn = rs.getString("ISBN");
-            String title = rs.getString("TITLE");
-            String author = rs.getString("AUTHOR");
-            Double price = rs.getDouble("PRICE");
-            return new Book(isbn, title, author, price);
-        }
-    }
-
-
     @Override
     public List<Book> allBooks() {
         return jdbcTemplate.query(GET_ALL_BOOKS_SQL, new BookMapper());
@@ -76,4 +64,16 @@ public class BookDaoSpringJdbcImpl implements BookDao{
         return jdbcTemplate.query("SELECT * FROM BOOK WHERE AUTHOR = ?",
                 new BookMapper(), author);
     }
+
+    class BookMapper implements RowMapper<Book>{
+        @Override
+        public Book mapRow(ResultSet rs, int rowNum) throws SQLException {
+            String isbn = rs.getString("ISBN");
+            String title = rs.getString("TITLE");
+            String author = rs.getString("AUTHOR");
+            Double price = rs.getDouble("PRICE");
+            return new Book(isbn, title, author, price);
+        }
+    }
+
 }
