@@ -29,7 +29,6 @@ public class BookDaoSpringJdbcImpl implements BookDao{
     private void createTables(){
         try{
             jdbcTemplate.update(CREATE_TABLE_SQL);
-
         }catch (Exception e){
             System.err.println("Table already exist");
         }
