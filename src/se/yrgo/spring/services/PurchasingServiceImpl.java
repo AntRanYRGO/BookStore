@@ -1,8 +1,10 @@
 package se.yrgo.spring.services;
 
+import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.spring.data.BookNotFoundException;
 import se.yrgo.spring.domain.Book;
 
+@Transactional
 public class PurchasingServiceImpl implements PurchasingService{
 
     private AccountService accounts;

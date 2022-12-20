@@ -1,11 +1,13 @@
 package se.yrgo.spring.services;
 
+import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.spring.data.BookDao;
 import se.yrgo.spring.data.BookNotFoundException;
 import se.yrgo.spring.domain.Book;
 
 import java.util.List;
 
+@Transactional
 public class BookServiceProductionImpl implements BookService{
     private BookDao dao;
     public BookServiceProductionImpl(BookDao dao){
@@ -35,6 +37,9 @@ public class BookServiceProductionImpl implements BookService{
     @Override
     public void registerNewBook(Book newBook) {
         dao.create(newBook);
+
+        //simulating crash
+//        throw new NullPointerException();
 
     }
 }
