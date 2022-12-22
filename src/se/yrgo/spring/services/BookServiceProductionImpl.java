@@ -42,4 +42,9 @@ public class BookServiceProductionImpl implements BookService{
 //        throw new NullPointerException();
 
     }
+
+    @Override
+    public void deleteFromStock(Book oldBook) {
+        dao.delete(oldBook);
+    }
 }
