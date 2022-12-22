@@ -40,6 +40,13 @@ public class BookServiceProductionImpl implements BookService{
 
         //simulating crash
 //        throw new NullPointerException();
+    }
+    public void registerNewBook(String isbn, String title, String author, Double price){
+        dao.create(new Book(isbn, title,author,price));
+    }
 
+    @Override
+    public void deleteFromStock(Book oldBook) {
+        dao.delete(oldBook);
     }
 }

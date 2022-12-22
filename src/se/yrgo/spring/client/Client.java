@@ -11,29 +11,20 @@ import java.util.List;
 public class Client {
 	public static void main(String[] args) {
 
-
 		ClassPathXmlApplicationContext container
 				= new ClassPathXmlApplicationContext("application.xml");
 
 		try {
+			PurchasingService purchasingService = container.getBean(PurchasingService.class);
 			BookService bookService = container.getBean(BookService.class);
-
-			bookService.registerNewBook(new Book("1234596896812", "Birds",
-					"Bird Lover", 100.00));
-
-			List<Book> allBooks = bookService.getEntireCatalogue();
-			for (Book book : allBooks) {
-				System.out.println(book);
+			bookService.registerNewBook(new Book("0123456789", "Spring" , "Author", 20.00) );
+			try {
+				purchasingService.buyBook("0123456789");
+			} catch (BookNotFoundException e) {
+				System.err.println("Sorry, this book doesn't exist.");
 			}
 		} finally {
 			container.close();
 		}
-
-//		try {
-//			Book findBook=bookService.getBookByIsbn("1234596896812");
-//			System.out.println(findBook);
-//		}catch (BookNotFoundException e) {
-//			System.err.println("Sorry, that book does not exist");
-//		}
 	}
 }

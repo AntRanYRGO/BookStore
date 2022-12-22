@@ -21,6 +21,7 @@ public class PurchasingServiceImpl implements PurchasingService{
     @Override
     public void buyBook(String isbn) throws BookNotFoundException {
         Book book = books.getBookByIsbn(isbn);
+        books.deleteFromStock(book);
         accounts.raiseInvoice(book);
     }
 }
