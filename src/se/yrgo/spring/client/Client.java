@@ -2,6 +2,7 @@ package se.yrgo.spring.client;
 
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 import se.yrgo.spring.data.BookNotFoundException;
+import se.yrgo.spring.data.CustomerCreditExceededException;
 import se.yrgo.spring.domain.Book;
 import se.yrgo.spring.services.BookService;
 import se.yrgo.spring.services.PurchasingService;
@@ -22,6 +23,8 @@ public class Client {
 				purchasingService.buyBook("0123456789");
 			} catch (BookNotFoundException e) {
 				System.err.println("Sorry, this book doesn't exist.");
+			} catch (CustomerCreditExceededException e) {
+				System.err.println("Customer doesn't have enough money");
 			}
 		} finally {
 			container.close();
