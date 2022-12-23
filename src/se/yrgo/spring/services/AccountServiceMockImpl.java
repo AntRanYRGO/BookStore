@@ -8,7 +8,7 @@ public class AccountServiceMockImpl implements AccountService
     public void raiseInvoice(Book requiredBook) throws CustomerCreditExceededException
     {
         // a very basic implementation for testing
-//        System.out.println("Raised the invoice for " + requiredBook);
-        throw new CustomerCreditExceededException();
+        System.out.println("Raised the invoice for " + requiredBook);
+//        throw new CustomerCreditExceededException();
     }
 }
