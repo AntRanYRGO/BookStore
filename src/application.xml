@@ -7,6 +7,12 @@
         <constructor-arg ref="jdbcTemplate"/>
     </bean>
 
+    <!-- Timing Bean -->
+    <bean id = "bookService" class =
+            "se.yrgo.spring.services.BookServiceTimingProxy">
+    <property name ="originalBookService" ref ="bookService" />
+    </bean>
+
     <!-- Templates -->
     <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
         <constructor-arg ref="dataSource"/>
@@ -22,7 +28,7 @@
 
 
     <!-- Service Beans -->
-    <bean id="bookService" class="se.yrgo.spring.services.BookServiceProductionImpl">
+    <bean id="bookServiceTarget" class="se.yrgo.spring.services.BookServiceProductionImpl">
         <constructor-arg ref="bookDao"/>
     </bean>
 

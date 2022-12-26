@@ -14,7 +14,12 @@ public class Client {
 
 		ClassPathXmlApplicationContext container
 				= new ClassPathXmlApplicationContext("application.xml");
-		BookService bookService = container.getBean(BookService.class);
+		//Without Timing
+//		BookService bookService = container.getBean("bookService" ,
+//				BookService.class);
+		//With Timing
+		BookService bookService =
+				container.getBean("bookService", BookService.class);
 		bookService.registerNewBook(new Book("1234596896812", "Birds",
 				"Bird Lover", 100.00));
 		List<Book> allBooks = bookService.getEntireCatalogue();
