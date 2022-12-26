@@ -1,42 +1,57 @@
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"  
-            "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
+        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
 <beans>
-
-    <!-- Dao Beans -->
-    <bean id="bookDao" class="se.yrgo.spring.data.BookDaoSpringJdbcImpl" init-method="createTables">
-        <constructor-arg ref="jdbcTemplate"/>
-    </bean>
-
-    <!-- Timing Bean -->
-    <bean id = "bookService" class =
-            "se.yrgo.spring.services.BookServiceTimingProxy">
-    <property name ="originalBookService" ref ="bookService" />
-    </bean>
-
-    <!-- Templates -->
-    <bean id="jdbcTemplate" class="org.springframework.jdbc.core.JdbcTemplate">
-        <constructor-arg ref="dataSource"/>
-    </bean>
-
     <!-- DataSources -->
-    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource" destroy-method="close">
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+          destroy-method="close">
         <property name="driverClassName" value="org.hsqldb.jdbcDriver"/>
-        <property name="url" value="jdbc:hsqldb:file:database.dat;shutdown=true"/>
+        <property name="url" value
+                ="jdbc:hsqldb:file:database.dat;shutdown=true"/>
         <property name="username" value="sa"/>
         <property name="password" value=""/>
     </bean>
 
-
-    <!-- Service Beans -->
-    <bean id="bookServiceTarget" class="se.yrgo.spring.services.BookServiceProductionImpl">
-        <constructor-arg ref="bookDao"/>
+    <!-- Templates -->
+    <bean id="jdbcTemplate"
+          class="org.springframework.jdbc.core.JdbcTemplate">
+        <constructor-arg ref="dataSource"/>
     </bean>
 
-    <bean id="accountService" class="se.yrgo.spring.services.AccountServiceMockImpl"/>
-
-    <bean id="purchasingService" class= "se.yrgo.spring.services.PurchasingServiceImpl">
-        <property name="bookService" ref="bookService"/>
-        <property name="accountService" ref="accountService"/>
+    <!-- Dao beans -->
+    <bean id="bookDao" class="se.yrgo.spring.data.BookDaoSpringJdbcImpl"
+          init-method="createTables">
+        <constructor-arg ref="jdbcTemplate">
+        </constructor-arg>
     </bean>
 
+    <bean id="bookServiceTarget"
+          class="se.yrgo.spring.services.BookServiceProductionImpl">
+        <constructor-arg ref="bookDao">
+        </constructor-arg>
+    </bean>
+
+    <bean id="accountsService"
+          class="se.yrgo.spring.services.AccountServiceMockImpl"/>
+
+    <bean id="purchasingService" class=
+            "se.yrgo.spring.services.PurchasingServiceImpl">
+        <constructor-arg ref="bookServiceTarget"/>
+        <constructor-arg ref="accountsService"/>
+    </bean>
+
+    <!-- Advice -->
+    <bean id="loggingAdvice"
+          class="se.yrgo.spring.advice.PerformanceTimingAdvice"/>
+    <!-- Generated Proxies -->
+    <bean id="bookService" class=
+            "org.springframework.aop.framework.ProxyFactoryBean">
+        <property name="proxyInterfaces"
+                  value="se.yrgo.spring.services.BookService"/>
+        <property name="interceptorNames">
+            <list>
+                <value>loggingAdvice</value>
+            </list>
+        </property>
+        <property name="target" ref="bookServiceTarget"/>
+    </bean>
 </beans>

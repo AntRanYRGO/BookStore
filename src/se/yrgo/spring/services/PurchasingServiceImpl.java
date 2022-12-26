@@ -8,6 +8,9 @@ public class PurchasingServiceImpl implements PurchasingService{
     private AccountService accounts;
     private BookService books;
 
+    public PurchasingServiceImpl(BookServiceProductionImpl bookServiceProduction, AccountServiceMockImpl accountServiceMock) {
+    }
+
     public void setAccountService(AccountService accounts){
         this.accounts = accounts;
     }
