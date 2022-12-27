@@ -46,10 +46,12 @@
     <!-- Advice -->
     <bean id="performanceTimingAdvice"
           class="se.yrgo.spring.advice.PerformanceTimingAdvice"/>
-    <aop:config>
+    <aop:config proxy-target-class="true">
         <aop:aspect ref="performanceTimingAdvice">
             <aop:around method="performTimingMeasurement"
                         pointcut="execution(* se.yrgo.spring.services.*.*(..))"/>
+            <aop:before method="beforeAdviceTesting"
+                        pointcut= "execution(* se.yrgo.spring.services.*.*(..))" />
         </aop:aspect>
     </aop:config>
 </beans>
