@@ -7,7 +7,7 @@ import java.util.Map;
 
 import se.yrgo.spring.domain.Book;
 
-public class BookServiceMockImpl implements BookService{
+public class BookServiceMockImpl implements BookService {
     private Map<String, Book> testBooks = new HashMap<String, Book>();
 
     public BookServiceMockImpl() {
@@ -19,23 +19,28 @@ public class BookServiceMockImpl implements BookService{
         testBooks.put("ISBN3", book3);
     }
 
-	public Book getBookByIsbn(String isbn) {
-		return testBooks.get(isbn);
-	}
+    public Book getBookByIsbn(String isbn) {
+        return testBooks.get(isbn);
+    }
 
-	public List<Book> getEntireCatalogue() 	{
-		return new ArrayList<Book>(testBooks.values());
-	}
+    public List<Book> getEntireCatalogue() {
+        return new ArrayList<Book>(testBooks.values());
+    }
 
-	public void registerNewBook(Book newBook) {
-		testBooks.put(newBook.getIsbn(), newBook);
-	}
+    public void registerNewBook(Book newBook) {
+        testBooks.put(newBook.getIsbn(), newBook);
+    }
 
-	public List<Book> getAllBooksByAuthor(String author) {
-		return null;
-	}
+    @Override
+    public void deleteFromStock(Book oldBook) {
+        testBooks.remove(oldBook.getIsbn());
+    }
 
-	public List<Book> getAllRecommendedBooks(String userId) {
-		return null;
-	}
+    public List<Book> getAllBooksByAuthor(String author) {
+        return null;
+    }
+
+    public List<Book> getAllRecommendedBooks(String userId) {
+        return null;
+    }
 }

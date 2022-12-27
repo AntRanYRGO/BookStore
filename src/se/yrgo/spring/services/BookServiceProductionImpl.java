@@ -6,10 +6,12 @@ import se.yrgo.spring.data.BookNotFoundException;
 import se.yrgo.spring.domain.Book;
 
 import java.util.List;
+
 @Transactional
-public class BookServiceProductionImpl implements BookService{
+public class BookServiceProductionImpl implements BookService {
     private BookDao dao;
-    public BookServiceProductionImpl(BookDao dao){
+
+    public BookServiceProductionImpl(BookDao dao) {
         this.dao = dao;
     }
 
@@ -37,5 +39,10 @@ public class BookServiceProductionImpl implements BookService{
     public void registerNewBook(Book newBook) {
         dao.create(newBook);
 
+    }
+
+    @Override
+    public void deleteFromStock(Book oldBook) {
+        dao.delete(oldBook);
     }
 }
