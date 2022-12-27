@@ -1,6 +1,10 @@
-<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN"
-        "http://www.springframework.org/dtd/spring-beans-2.0.dtd">
-<beans>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:aop="http://www.springframework.org/schema/aop"
+
+       xsi:schemaLocation="
+        http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+        http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd">
     <!-- DataSources -->
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
@@ -24,7 +28,7 @@
         </constructor-arg>
     </bean>
 
-    <bean id="bookServiceTarget"
+    <bean id="bookService"
           class="se.yrgo.spring.services.BookServiceProductionImpl">
         <constructor-arg ref="bookDao">
         </constructor-arg>
@@ -35,23 +39,17 @@
 
     <bean id="purchasingService" class=
             "se.yrgo.spring.services.PurchasingServiceImpl">
-        <constructor-arg ref="bookServiceTarget"/>
+        <constructor-arg ref="bookService"/>
         <constructor-arg ref="accountsService"/>
     </bean>
 
     <!-- Advice -->
-    <bean id="loggingAdvice"
+    <bean id="performanceTimingAdvice"
           class="se.yrgo.spring.advice.PerformanceTimingAdvice"/>
-    <!-- Generated Proxies -->
-    <bean id="bookService" class=
-            "org.springframework.aop.framework.ProxyFactoryBean">
-        <property name="proxyInterfaces"
-                  value="se.yrgo.spring.services.BookService"/>
-        <property name="interceptorNames">
-            <list>
-                <value>loggingAdvice</value>
-            </list>
-        </property>
-        <property name="target" ref="bookServiceTarget"/>
-    </bean>
+    <aop:config>
+        <aop:aspect ref="performanceTimingAdvice">
+            <aop:around method="performTimingMeasurement"
+                        pointcut="execution(* se.yrgo.spring.services.*.*(..))"/>
+        </aop:aspect>
+    </aop:config>
 </beans>
