@@ -1,7 +1,6 @@
 package se.yrgo.spring.advice;
 
-import org.aopalliance.intercept.MethodInterceptor;
-import org.aopalliance.intercept.MethodInvocation;
+
 import org.aspectj.lang.JoinPoint;
 import org.aspectj.lang.ProceedingJoinPoint;
 
@@ -13,8 +12,7 @@ public class PerformanceTimingAdvice {
 
         try {
             //proceed to target
-            Object value = method.proceed();
-            return value;
+            return method.proceed();
         } finally {
             //after
             long endTime = System.nanoTime();
