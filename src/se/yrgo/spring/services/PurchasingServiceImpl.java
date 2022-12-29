@@ -10,7 +10,10 @@ public class PurchasingServiceImpl implements PurchasingService{
     private AccountService accounts;
     private BookService books;
 
-    public PurchasingServiceImpl(BookServiceProductionImpl bookServiceProduction, AccountServiceMockImpl accountServiceMock) {
+    public PurchasingServiceImpl(BookServiceProductionImpl bookServiceProduction,
+                                 AccountServiceMockImpl accountServiceMock) {
+        this.books = bookServiceProduction;
+        this.accounts = accountServiceMock;
     }
 
     public void setAccountService(AccountService accounts){
