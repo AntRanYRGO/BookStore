@@ -4,5 +4,5 @@ import se.yrgo.spring.domain.Book;
 
 public interface AccountService
 {
-    public void raiseInvoice(Book requiredBook);
+    void raiseInvoice(Book requiredBook)throws CustomerCreditExceededException;
 }
