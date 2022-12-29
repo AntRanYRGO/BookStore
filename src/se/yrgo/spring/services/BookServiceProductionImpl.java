@@ -14,7 +14,6 @@ public class BookServiceProductionImpl implements BookService {
     public BookServiceProductionImpl(BookDao dao) {
         this.dao = dao;
     }
-
     @Override
     public List<Book> getAllBooksByAuthor(String author) {
         return dao.findBooksByAuthor(author);
@@ -40,6 +39,7 @@ public class BookServiceProductionImpl implements BookService {
         dao.create(newBook);
 
     }
+
 
     @Override
     public void deleteFromStock(Book oldBook) {

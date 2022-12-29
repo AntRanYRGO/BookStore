@@ -9,20 +9,18 @@ import se.yrgo.spring.services.PurchasingService;
 import java.util.List;
 
 public class Client {
-	public static void main(String[] args){
-		System.out.println("Testing buying a book ....");
-		String isbn = "ISBN1";
+	public static void main(String[] args) {
 
-		ClassPathXmlApplicationContext container = new
-				ClassPathXmlApplicationContext("application.xml");
+		ClassPathXmlApplicationContext container = new ClassPathXmlApplicationContext("application.xml");
+
+		BookService bookService = container.getBean(BookService.class);
+		bookService.registerNewBook(new Book("0123456789", "Spring" , "Author", 20.00) );
 		try {
-			BookService bookService = container.getBean("bookService" , BookService.class);
-
-			bookService.registerNewBook(new Book("1234596896812", "Birds",
-					"Bird Lover", 100.00));
-			List<Book> allBooks = bookService.getEntireCatalogue();
-			for(Book book:allBooks) {
-				System.out.println(book);
+			PurchasingService purchasing = container.getBean(PurchasingService.class);
+			try {
+				purchasing.buyBook("0123456789");
+			} catch (BookNotFoundException e) {
+				System.err.println("Sorry, this book doesn't exist.");
 			}
 		} finally {
 			container.close();
