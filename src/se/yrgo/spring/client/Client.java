@@ -25,6 +25,7 @@ public class Client {
 
 			//begin
 			try {
+				System.out.println("Trying getting book");
 				purchasing.buyBook("0123456789");
 
 			}catch (BookNotFoundException e){

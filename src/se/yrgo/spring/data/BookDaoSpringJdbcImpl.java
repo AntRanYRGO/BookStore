@@ -14,8 +14,7 @@ import java.util.List;
 public class BookDaoSpringJdbcImpl implements BookDao{
     private JdbcTemplate jdbcTemplate;
     private static final String INSERT_BOOK_SQL =
-            "INSERT INTO BOOK(ISBN, TITLE, AUTHOR, PRICE)" +
-                    "VALUES (?, ?, ?, ?)";
+            "INSERT INTO BOOK(ISBN, TITLE, AUTHOR, PRICE) VALUES (?, ?, ?, ?)";
 
     private static final String CREATE_TABLE_SQL =
             "CREATE TABLE BOOK(ISBN VARCHAR(20),TITLE VARCHAR(50),AUTHOR VARCHAR(50), PRICE DOUBLE)";
