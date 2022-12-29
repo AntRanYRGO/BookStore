@@ -5,9 +5,9 @@ import java.util.List;
 import se.yrgo.spring.domain.Book;
 
 public interface BookDao {
-    public List<Book> allBooks();
-    public Book findByIsbn(String isbn) throws BookNotFoundException;
-    public void create(Book newBook);
-    public void delete(Book redundantBook);
-    public List<Book> findBooksByAuthor(String author);
+    List<Book> allBooks();
+    Book findByIsbn(String isbn) throws BookNotFoundException;
+    void create(Book newBook);
+    void delete(Book redundantBook);
+    List<Book> findBooksByAuthor(String author);
 }
