@@ -1,11 +1,9 @@
 package se.yrgo.spring.services;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
-import org.springframework.transaction.interceptor.TransactionAspectSupport;
 import se.yrgo.spring.data.BookNotFoundException;
 import se.yrgo.spring.domain.Book;
 
@@ -17,12 +15,6 @@ public class PurchasingServiceImpl implements PurchasingService {
     private AccountService accounts;
     @Autowired
     private BookService books;
-
-//    public PurchasingServiceImpl(BookServiceProductionImpl bookServiceProduction,
-//                                 AccountServiceMockImpl accountServiceMock) {
-//        this.books = bookServiceProduction;
-//        this.accounts = accountServiceMock;
-//    }
 
     public void setAccountService(AccountService accounts) {
         this.accounts = accounts;
