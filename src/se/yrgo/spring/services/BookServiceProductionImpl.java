@@ -1,5 +1,8 @@
 package se.yrgo.spring.services;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Propagation;
 import org.springframework.transaction.annotation.Transactional;
 import se.yrgo.spring.data.BookDao;
@@ -9,7 +12,9 @@ import se.yrgo.spring.domain.Book;
 import java.util.List;
 
 @Transactional(propagation= Propagation.REQUIRES_NEW)
+@Service("bookService")
 public class BookServiceProductionImpl implements BookService {
+    @Autowired
     private BookDao dao;
 
     public BookServiceProductionImpl(BookDao dao) {

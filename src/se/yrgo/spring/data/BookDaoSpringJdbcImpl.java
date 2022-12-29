@@ -1,16 +1,21 @@
 package se.yrgo.spring.data;
 
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataAccessException;
 import org.springframework.dao.EmptyResultDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.core.RowMapper;
+import org.springframework.stereotype.Component;
+import org.springframework.stereotype.Repository;
 import se.yrgo.spring.domain.Book;
 
+import javax.annotation.PostConstruct;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.List;
 
+@Repository
 public class BookDaoSpringJdbcImpl implements BookDao{
     private JdbcTemplate jdbcTemplate;
     private static final String INSERT_BOOK_SQL =
@@ -21,10 +26,12 @@ public class BookDaoSpringJdbcImpl implements BookDao{
     private static final String GET_ALL_BOOKS_SQL = "SELECT * FROM BOOK";
 
 
+    @Autowired
     public BookDaoSpringJdbcImpl(JdbcTemplate jdbcTemplate){
         this.jdbcTemplate = jdbcTemplate;
 
     }
+    @PostConstruct
     private void createTables(){
         try{
             jdbcTemplate.update(CREATE_TABLE_SQL);
