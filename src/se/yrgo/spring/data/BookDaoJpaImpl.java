@@ -14,13 +14,14 @@ public class BookDaoJpaImpl implements BookDao{
     private EntityManager em;
     @Override
     public List<Book> allBooks() {
-        return em.createQuery("SELECT BOOK FROM BOOK AS BOOK").getResultList();
+        return em.createQuery("select book from Book as book").getResultList();
     }
+
 
     @Override
     public Book findByIsbn(String isbn) throws BookNotFoundException {
         try {
-            return (Book) em.createQuery("SELECT DISTINCT BOOK FROM BOOK AS BOOK WHERE BOOK.ISBN=:isbn")
+            return (Book) em.createQuery("select book from Book as book where book.isbn=:isbn")
                     .setParameter("isbn", isbn).getSingleResult();
         }catch (javax.persistence.NoResultException e){
             throw new BookNotFoundException();
@@ -33,16 +34,15 @@ public class BookDaoJpaImpl implements BookDao{
         em.persist(newBook);
     }
 
-    //This should use Id instead of isbn but my database isn't designed to do that currently
     @Override
     public void delete(Book redundantBook) {
-        Book book = em.find(Book.class, redundantBook.getIsbn());
+        Book book = em.find(Book.class, redundantBook.getId());
         em.remove(book);
     }
 
     @Override
     public List<Book> findBooksByAuthor(String author) {
-        return em.createQuery("SELECT BOOK FROM BOOK AS BOOK WHERE BOOK.AUTHOR =:author")
+        return em.createQuery("select book from Book as book where book.author =:author")
                 .setParameter("author", author).getResultList();
     }
 }

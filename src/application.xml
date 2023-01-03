@@ -37,7 +37,6 @@
     </bean>
 
     <!-- Transaction Manager -->
-    <!-- Transaction Manager -->
     <bean id="transactionManager"
           class="org.springframework.orm.jpa.JpaTransactionManager"
           autowire="byType"/>
