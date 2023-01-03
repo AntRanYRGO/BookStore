@@ -1,11 +1,13 @@
 package se.yrgo.spring.data;
 
+import org.springframework.stereotype.Repository;
 import se.yrgo.spring.domain.Book;
 
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import java.util.List;
 
+@Repository
 public class BookDaoJpaImpl implements BookDao{
 
     @PersistenceContext
